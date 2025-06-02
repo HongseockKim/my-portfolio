@@ -4,8 +4,8 @@ import Windows from "./Windows.jsx";
 
 function Building({
                       position = [0, 0, 0],     // 건물 위치
-                      width = 2,                // 가로
-                      height = 5,               // 높이
+                      width = 3,                // 가로
+                      height = 3,               // 높이
                       depth = 2,                // 세로
                       color = "#4a90e2"         // 색상
                   }) {
@@ -33,13 +33,13 @@ function Building({
 
             {/* 🏠 지붕 */}
             <mesh position={[0, height + 0.3, 0]}>
-                <coneGeometry args={[width * 0.7, 0.8, 4]} />  {/* 사각뿔 지붕 */}
+                <coneGeometry args={[width * 0.7, 0.8, 7]} />  {/* 사각뿔 지붕 */}
                 <meshStandardMaterial color="#8b4513" />  {/* 갈색 지붕 */}
             </mesh>
 
             {/* 🚪 문 */}
             <mesh position={[0, 0.8, depth/2 + 0.01]}>  {/* 살짝 앞으로 */}
-                <boxGeometry args={[0.6, 1.6, 0.1]} />
+                <boxGeometry args={[1, 1.6, 0.1]} />
                 <meshStandardMaterial color="#654321" />
             </mesh>
 
@@ -52,3 +52,5 @@ function Building({
         </group>
     );
 }
+
+export default Building;

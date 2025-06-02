@@ -1,4 +1,5 @@
 import React from 'react';
+import Building from "./object/Building.jsx";
 
 function Scene() {
 
@@ -9,7 +10,7 @@ function Scene() {
                       rotation={[-Math.PI / 2, 0, 0]}
                       receiveShadow
                   >
-                <planeGeometry args={[100, 20,20,30]} />
+                <planeGeometry args={[50, 30,20,30]} />
                 <meshStandardMaterial color="#fff" />
             </mesh>
             <ambientLight intensity={0.1} />
@@ -21,6 +22,9 @@ function Scene() {
                 shadow-mapSize-height={2048}
             />
             <fog attach="fog" args={['#fff', 0, 100]} />
+            <mesh position={[-7, -5, -5]} castShadow>
+                <Building position={[-6, 0, 0]} width={5} height={7} depth={1} color="#4a90e2" />
+            </mesh>
         </>
 
     );
