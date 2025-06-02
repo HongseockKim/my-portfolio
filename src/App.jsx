@@ -8,7 +8,6 @@ function App() {
 
   return (
       <div className="app">
-      {/* 3D 캔버스 */}
           <Canvas
               camera={{
                   position: [0, 0, 10],

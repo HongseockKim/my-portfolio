@@ -17,6 +17,8 @@ html, body, #root {
   position: relative;
   width: 100vw;
   height: 100vh;
+  z-index: 99;
+  background: blue;
 }
 
 /* 스크롤바 커스텀 */
