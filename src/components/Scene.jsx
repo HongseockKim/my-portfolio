@@ -15,7 +15,7 @@ function Scene({ viewportSize }) {
 
             // 화면 너비에 따라 카메라 위치 조정
             const baseWidth = 1920;
-            const baseDistance = 8;
+            const baseDistance = 10;
             const scaleFactor = Math.max(0.8, Math.min(1.5, baseWidth / viewportSize.width));
 
             // 카메라 위치 직접 설정
@@ -44,12 +44,12 @@ function Scene({ viewportSize }) {
             />
 
             <mesh
-                position={[0, 0, 0]}
+                position={[0, -2, 0]}
                 rotation={[-Math.PI / 2, 0, 0]}
                 receiveShadow
             >
                 <SubstanceModel
-                    scale={30}
+                    scale={20}
                     position={[0, 0, 0]}
                 />
             </mesh>

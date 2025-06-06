@@ -3,6 +3,7 @@ import { useRef } from "react";
 import * as THREE from "three";
 import planetModel from '../../models/planet2.glb';
 import buildingModel from '../../models/portpolio.glb';
+import mys from '../../models/my.glb';
 
 function SubstanceModel({ scale = 1, position = [0, 0, 0] }) {
     const group = useRef();
@@ -11,11 +12,15 @@ function SubstanceModel({ scale = 1, position = [0, 0, 0] }) {
     // 모델 로드
     const { scene: planetScene } = useGLTF(planetModel);
     const { scene: portPolioScene } = useGLTF(buildingModel);
+    const { scene: my } = useGLTF(mys);
 
     // PivotControls에서 확인한 값
-    const buildingPosition = [1.8,-0.5, 1.5]; // 콘솔에서 확인한 위치
-    const buildingRotation = [2.5, 0.4,-1]; // 회전 값 - 필요하다면 수정
-    const buildingScale = 3;
+    const buildingPosition = [1.6,0.55, 1.2];
+    const buildingRotation = [-5.6, -0.4,-1];
+    const buildingScale = 5;
+    const myPosition = [-1,-0.5, 1.67];
+    const myRotation = [1.5, -1.5,-0.2];
+    const myScale = 1;
 
     return (
         <group>
@@ -37,6 +42,13 @@ function SubstanceModel({ scale = 1, position = [0, 0, 0] }) {
                 scale={buildingScale}
             >
                 <primitive object={portPolioScene.clone()} />
+            </group>
+            <group
+                position={myPosition}
+                rotation={myRotation}
+                scale={myScale}
+            >
+                <primitive object={my.clone()} />
             </group>
         </group>
     );
