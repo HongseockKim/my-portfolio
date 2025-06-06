@@ -1,32 +1,59 @@
-import React from 'react';
-import Building from "./object/Building.jsx";
+import React, { useEffect, useRef } from 'react';
+import { useThree, useFrame } from '@react-three/fiber';
+import { OrbitControls } from '@react-three/drei';
+import SubstanceModel from "./object/SubstanceModel.jsx";
 
-function Scene() {
+function Scene({ viewportSize }) {
+    const { camera } = useThree();
+    const controlsRef = useRef();
+
+    // 화면 크기에 따른 카메라 업데이트
+    useEffect(() => {
+        if (camera) {
+            // 화면 비율 업데이트
+            camera.aspect = viewportSize.width / viewportSize.height;
+
+            // 화면 너비에 따라 카메라 위치 조정
+            const baseWidth = 1920;
+            const baseDistance = 8;
+            const scaleFactor = Math.max(0.8, Math.min(1.5, baseWidth / viewportSize.width));
+
+            // 카메라 위치 직접 설정
+            camera.position.set(0, 0, baseDistance * scaleFactor);
+            camera.lookAt(0, 0, 0);
+            camera.updateProjectionMatrix();
+
+            // 컨트롤 리셋
+            if (controlsRef.current) {
+                controlsRef.current.update();
+            }
+        }
+    }, [viewportSize, camera]);
 
     return (
         <>
-                  <mesh
-                      position={[0, -8, 0]}
-                      rotation={[-Math.PI / 2, 0, 0]}
-                      receiveShadow
-                  >
-                <planeGeometry args={[50, 30,20,30]} />
-                <meshStandardMaterial color="#fff" />
-            </mesh>
-            <ambientLight intensity={0.1} />
-            <directionalLight
-                position={[10, 10, 5]}
-                intensity={1}
-                castShadow
-                shadow-mapSize-width={2048}
-                shadow-mapSize-height={2048}
+            {/* OrbitControls 추가 */}
+            <OrbitControls
+                ref={controlsRef}
+                enableDamping
+                dampingFactor={0.05}
+                rotateSpeed={0.5}
+                zoomSpeed={0.7}
+                minDistance={5}
+                maxDistance={50}
             />
-            <fog attach="fog" args={['#fff', 0, 100]} />
-            <mesh position={[-7, -5, -5]} castShadow>
-                <Building position={[-6, 0, 0]} width={5} height={7} depth={1} color="#4a90e2" />
+
+            <mesh
+                position={[0, 0, 0]}
+                rotation={[-Math.PI / 2, 0, 0]}
+                receiveShadow
+            >
+                <SubstanceModel
+                    scale={30}
+                    position={[0, 0, 0]}
+                />
             </mesh>
         </>
-
     );
 }
 
