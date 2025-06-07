@@ -6,6 +6,9 @@ export default defineConfig({
   plugins: [react()],
   base: '/my-portfolio/',
   assetsInclude: ['**/*.glb'],
+  build: {
+    outDir: 'docs',
+  },
   server: {
     port: 3000,
   },
