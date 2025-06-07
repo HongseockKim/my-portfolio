@@ -1,29 +1,37 @@
 import React, { useEffect, useRef } from 'react';
 import { useThree, useFrame } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
+import { OrbitControls, Stars } from '@react-three/drei';
 import SubstanceModel from "./object/SubstanceModel.jsx";
+import * as THREE from 'three';
+
 
 function Scene({ viewportSize }) {
-    const { camera } = useThree();
+    const { camera, scene } = useThree();
     const controlsRef = useRef();
+    const starsRef = useRef();
 
-    // 화면 크기에 따른 카메라 업데이트
+    useEffect(() => {
+        scene.background = new THREE.Color('#000000');
+        scene.fog = new THREE.FogExp2('#000000', 0.010);
+    }, [scene]);
+
+    useFrame((state, delta) => {
+        if (starsRef.current) {
+            starsRef.current.rotation.x += delta * 0.01;
+            starsRef.current.rotation.y += delta * 0.01;
+        }
+    });
+
     useEffect(() => {
         if (camera) {
-            // 화면 비율 업데이트
             camera.aspect = viewportSize.width / viewportSize.height;
-
-            // 화면 너비에 따라 카메라 위치 조정
             const baseWidth = 1920;
             const baseDistance = 10;
             const scaleFactor = Math.max(0.8, Math.min(1.5, baseWidth / viewportSize.width));
-
-            // 카메라 위치 직접 설정
             camera.position.set(0, 0, baseDistance * scaleFactor);
             camera.lookAt(0, 0, 0);
             camera.updateProjectionMatrix();
 
-            // 컨트롤 리셋
             if (controlsRef.current) {
                 controlsRef.current.update();
             }
@@ -32,7 +40,28 @@ function Scene({ viewportSize }) {
 
     return (
         <>
-            {/* OrbitControls 추가 */}
+            <group ref={starsRef}>
+                <Stars
+                    radius={100}
+                    depth={50}
+                    count={3000}
+                    factor={10}
+                    saturation={0.5}
+                    fade
+                />
+            </group>
+               <group>
+                <Stars
+                    radius={120}
+                    depth={80}
+                    count={1000}
+                    factor={20}
+                    saturation={0.8}
+                    fade
+                />
+            </group>
+
+
             <OrbitControls
                 ref={controlsRef}
                 enableDamping

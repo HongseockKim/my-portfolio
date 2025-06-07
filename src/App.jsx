@@ -4,20 +4,20 @@ import Scene from './components/Scene';
 import './App.css'
 import SubstanceModel from "./components/object/SubstanceModel.jsx";
 import {OrbitControls} from "@react-three/drei";
+import Modal from "./components/modal/Modal.jsx";
+import PortThree from "./components/PortThree.jsx";
+import useModalStore from "./store/useModalStore.jsx";
+import MyInfo from "./components/MyInfo.jsx";
 
 function App() {
     const [viewportSize, setViewportSize] = useState({
         width: window.innerWidth,
         height: window.innerHeight
     });
-
-    // 화면 너비에 따라 카메라 위치 계산
+    const type = useModalStore(state => state.type);
     const calculateCameraPosition = () => {
-        // 기준 너비 (예: 1920px)를 기준으로 스케일링
         const baseWidth = 1920;
-        const baseDistance = 10; // 기본 카메라 거리
-
-        // 화면이 작을수록 카메라가 더 멀리 위치 (더 많은 요소를 보여줌)
+        const baseDistance = 10;
         const scaleFactor = Math.max(0.8, Math.min(1.5, baseWidth / window.innerWidth));
         const zPosition = baseDistance * scaleFactor;
 
@@ -72,6 +72,12 @@ function App() {
             />
         </Suspense>
       </Canvas>
+            <Modal>
+                {
+                    type === 'portfolio' ? <PortThree/> : <MyInfo/>
+                }
+
+            </Modal>
     </div>
     )
 }
