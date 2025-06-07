@@ -3,7 +3,7 @@ import Masonry from 'react-masonry-css';
 const PortThree = () => {
     const BASE_URL = import.meta.env.BASE_URL;
     const items = [
-        { id: 1, image: `${BASE_URL}smeg.png`, title: 'smeg' },
+        { id: 1, image: `/smeg.png`, title: 'smeg' },
         { id: 2, image: `${BASE_URL}daelim.png`, title: '대림 코퍼레이션' },
         { id: 3, image: `${BASE_URL}children.png`, title: '육아정책연구소' },
         { id: 4, image: `${BASE_URL}canvas.png`, title: 'canvas' },
