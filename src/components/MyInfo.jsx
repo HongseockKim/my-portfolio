@@ -5,22 +5,22 @@ const MyInfo = () => {
     const [activeTab, setActiveTab] = useState('all');
     const BASE_URL = import.meta.env.BASE_URL;
     const mySkill = [
-        { name: 'JavaScript', image: `${BASE_URL}skilll/img_1.png`, category: 'frontend' },
-        { name: 'Vue', image: `${BASE_URL}skilll/img_2.png`, category: 'frontend' },
-        { name: 'React', image: `${BASE_URL}skilll/img_3.png`, category: 'frontend' },
-        { name: 'CSS', image: `${BASE_URL}skilll/img_4.png`, category: 'frontend' },
-        { name: 'SCSS', image: `${BASE_URL}skilll/img_5.png`, category: 'frontend' },
-        { name: 'PHP', image: `${BASE_URL}skilll/img_6.png`, category: 'backend' },
-        { name: 'Java Spring', image: `${BASE_URL}skilll/img_7.png`, category: 'backend' },
-        { name: 'Node.js', image: `${BASE_URL}skilll/img_8.png`, category: 'backend' },
-        { name: 'Electron', image: `${BASE_URL}skilll/img_9.png`, category: 'native' },
-        { name: 'Flutter', image: `${BASE_URL}skilll/img_10.png`, category: 'native' },
-        { name: 'Jenkins', image: `${BASE_URL}skilll/img_11.png`, category: 'devops' },
-        { name: 'GitHub', image: `${BASE_URL}skilll/img_14.png`, category: 'git' },
-        { name: 'Bitbucket', image: `${BASE_URL}skilll/img_15.png`, category: 'git' },
-        { name: 'Sentry', image: `${BASE_URL}skilll/img_16.png`, category: 'monitoring' },
-        { name: 'WhaTap', image: `${BASE_URL}skilll/img_19.png`, category: 'monitoring' },
-        { name: 'Datadog', image: `${BASE_URL}skilll/img_18.png`, category: 'monitoring' },
+        { name: 'JavaScript', image: `img/skilll/img_1.png`, category: 'frontend' },
+        { name: 'Vue', image: `img/skilll/img_2.png`, category: 'frontend' },
+        { name: 'React', image: `img/skilll/img_3.png`, category: 'frontend' },
+        { name: 'CSS', image: `img/skilll/img_4.png`, category: 'frontend' },
+        { name: 'SCSS', image: `img/skilll/img_5.png`, category: 'frontend' },
+        { name: 'PHP', image: `img/skilll/img_6.png`, category: 'backend' },
+        { name: 'Java Spring', image: `img/skilll/img_7.png`, category: 'backend' },
+        { name: 'Node.js', image: `img/skilll/img_8.png`, category: 'backend' },
+        { name: 'Electron', image: `img/skilll/img_9.png`, category: 'native' },
+        { name: 'Flutter', image: `img/skilll/img_10.png`, category: 'native' },
+        { name: 'Jenkins', image: `img/skilll/img_11.png`, category: 'devops' },
+        { name: 'GitHub', image: `img/skilll/img_14.png`, category: 'git' },
+        { name: 'Bitbucket', image: `img/skilll/img_15.png`, category: 'git' },
+        { name: 'Sentry', image: `img/skilll/img_16.png`, category: 'monitoring' },
+        { name: 'WhaTap', image: `img/skilll/img_19.png`, category: 'monitoring' },
+        { name: 'Datadog', image: `img/skilll/img_18.png`, category: 'monitoring' },
     ];
 
     // 필터링된 스킬 목록
