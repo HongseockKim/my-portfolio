@@ -1,14 +1,18 @@
-import React, { useEffect, useRef } from 'react';
+import React, {lazy, useEffect, useRef} from 'react';
 import { useThree, useFrame } from '@react-three/fiber';
 import { OrbitControls, Stars } from '@react-three/drei';
-import SubstanceModel from "./object/SubstanceModel.jsx";
+const SubstanceModel = lazy(() => import('./object/SubstanceModel.jsx'));
 import * as THREE from 'three';
 
 
 function Scene({ viewportSize }) {
-    const { camera, scene } = useThree();
+    const { camera, scene,gl } = useThree();
     const controlsRef = useRef();
     const starsRef = useRef();
+
+    useEffect(() => {
+        gl.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    }, [gl]);
 
     useEffect(() => {
         scene.background = new THREE.Color('#000000');
@@ -44,7 +48,7 @@ function Scene({ viewportSize }) {
                 <Stars
                     radius={100}
                     depth={50}
-                    count={3000}
+                    count={1500}
                     factor={10}
                     saturation={0.5}
                     fade
@@ -54,7 +58,7 @@ function Scene({ viewportSize }) {
                 <Stars
                     radius={120}
                     depth={80}
-                    count={1000}
+                    count={500}
                     factor={20}
                     saturation={0.8}
                     fade
