@@ -1,8 +1,10 @@
 import React, {lazy, Suspense, useEffect, useRef} from 'react';
 import { useThree, useFrame } from '@react-three/fiber';
-import { OrbitControls, Stars } from '@react-three/drei';
+import {OrbitControls, Stars, Text} from '@react-three/drei';
 const SubstanceModel = lazy(() => import('./object/SubstanceModel.jsx'));
 import * as THREE from 'three';
+import ShootingStarText from "./text/ShootingStarText.jsx";
+import StarWarsText from "./text/StarWarsText.jsx";
 
 
 function Scene({ viewportSize,onModelLoad}) {
@@ -54,6 +56,17 @@ function Scene({ viewportSize,onModelLoad}) {
                     fade
                 />
             </group>
+            <group position={[0,10,5]}>
+                <StarWarsText delay={0} duration={6000} >
+                    안녕하세요
+                </StarWarsText>
+                <StarWarsText delay={4000} duration={6000} >
+                    찾아주셔서 감사합니다.
+                </StarWarsText>
+                <StarWarsText delay={8000} duration={6000} >
+                    모델링을 클릭하면 상세보기가 가능합니다!
+                </StarWarsText>
+            </group>
                <group>
                 <Stars
                     radius={120}
@@ -64,8 +77,6 @@ function Scene({ viewportSize,onModelLoad}) {
                     fade
                 />
             </group>
-
-
             <OrbitControls
                 ref={controlsRef}
                 enableDamping
