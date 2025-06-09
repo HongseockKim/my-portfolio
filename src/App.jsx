@@ -45,8 +45,6 @@ function App() {
     });
     const [isCanvasLoading, setIsCanvasLoading] = useState(true);
     const [isModelLoading, setIsModelLoading] = useState(true);
-
-    const [isLoading, setIsLoading] = useState(true);
     const type = useModalStore(state => state.type);
     const calculateCameraPosition = () => {
         const baseWidth = 1920;
@@ -99,15 +97,15 @@ function App() {
         <Suspense fallback={null}>
           <Scene viewportSize={viewportSize} onModelLoad={handleModelLoad} />
             <OrbitControls
-                enablePan={false} // 패닝(이동) 비활성화
-                enableZoom={true} // 줌 활성화
-                enableRotate={true} // 회전 활성화
-                minDistance={2} // 최소 줌 거리
-                maxDistance={10} // 최대 줌 거리
-                rotateSpeed={0.5} // 회전 속도
-                target={[0, 0, 0]} // 카메라가 바라보는 중심점
-                autoRotate={false} // 자동 회전 활성화
-                autoRotateSpeed={1} // 자동 회전 속도
+                enablePan={false}
+                enableZoom={true}
+                enableRotate={true}
+                minDistance={2}
+                maxDistance={10}
+                rotateSpeed={0.5}
+                target={[0, 0, 0]}
+                autoRotate={false}
+                autoRotateSpeed={1}
 
             />
         </Suspense>
