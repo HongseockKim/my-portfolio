@@ -8,12 +8,45 @@ import Modal from "./components/modal/Modal.jsx";
 import PortThree from "./components/PortThree.jsx";
 import useModalStore from "./store/useModalStore.jsx";
 import MyInfo from "./components/MyInfo.jsx";
+import {ScaleLoader} from "react-spinners";
+
+const LoadingSpinner = () => {
+    return (
+        <div style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            zIndex: 1000,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '20px'
+        }}>
+            <ScaleLoader
+                color="#36d7b7"
+                height={50}
+                width={5}
+                radius={2}
+                margin={2}
+            />
+            <div style={{ color: '#ffffff', marginTop: '20px', fontSize: '16px' }}>
+                Loading...
+            </div>
+        </div>
+    );
+};
+
 
 function App() {
     const [viewportSize, setViewportSize] = useState({
         width: window.innerWidth,
         height: window.innerHeight
     });
+    const [isCanvasLoading, setIsCanvasLoading] = useState(true);
+    const [isModelLoading, setIsModelLoading] = useState(true);
+
+    const [isLoading, setIsLoading] = useState(true);
     const type = useModalStore(state => state.type);
     const calculateCameraPosition = () => {
         const baseWidth = 1920;
@@ -36,9 +69,15 @@ function App() {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
+    const handleModelLoad = () => {
+        setIsModelLoading(false);
+    };
+
+
     return (
         <div className="app">
-      <Canvas
+            {(isCanvasLoading || isModelLoading) && <LoadingSpinner />}
+            <Canvas
           shadows
           camera={{
               position: calculateCameraPosition(),
@@ -55,9 +94,10 @@ function App() {
               height: '100%',
               zIndex: 1
           }}
+          onCreated={() => setIsCanvasLoading(false)}
       >
         <Suspense fallback={null}>
-          <Scene viewportSize={viewportSize} />
+          <Scene viewportSize={viewportSize} onModelLoad={handleModelLoad} />
             <OrbitControls
                 enablePan={false} // 패닝(이동) 비활성화
                 enableZoom={true} // 줌 활성화

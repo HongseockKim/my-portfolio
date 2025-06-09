@@ -1,11 +1,11 @@
-import React, {lazy, useEffect, useRef} from 'react';
+import React, {lazy, Suspense, useEffect, useRef} from 'react';
 import { useThree, useFrame } from '@react-three/fiber';
 import { OrbitControls, Stars } from '@react-three/drei';
 const SubstanceModel = lazy(() => import('./object/SubstanceModel.jsx'));
 import * as THREE from 'three';
 
 
-function Scene({ viewportSize }) {
+function Scene({ viewportSize,onModelLoad}) {
     const { camera, scene,gl } = useThree();
     const controlsRef = useRef();
     const starsRef = useRef();
@@ -80,6 +80,7 @@ function Scene({ viewportSize }) {
                 position={[0, -2, 0]}
                 rotation={[-Math.PI / 2, 0, 0]}
                 receiveShadow
+                onAfterRender={() => onModelLoad?.()}
             >
                 <SubstanceModel
                     scale={20}
